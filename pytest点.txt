@@ -109,11 +109,6 @@ yaml介绍: 是一种数据格式，支持注释，换行，多行字符串，�
 
 
 
-116100225Cc.
-
-
-
-https://docs.docker.com/engine/reference/commandline/dockerd/
 
 
 
