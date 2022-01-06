@@ -5,12 +5,3 @@ pytest -ordering  （用于改变测试用例的执行顺序）
 pytest- rerunfailures  （用例跑失败后重跑）
 allure -pytest （用于生成美观的测试报告）
 全部安装：Terminal里输入命令   pip install -r +包含所有插件的文件名
-
-
-
-
-
-
-
-
-
