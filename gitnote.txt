@@ -1,0 +1,103 @@
+*Git 一般工作流程：
+克隆 Git 资源作为工作目录。
+在克隆的资源上添加或修改文件。
+如果其他人修改了，可以更新资源。
+在提交前查看修改。
+提交修改。
+在修改完成后，如果发现错误，可以撤回提交并再次修改并提交。
+
+*Git 工作空间分为：
+工作区(Working Directory)：在电脑里能看到的目录。
+版本库(Repository)：工作区有一个隐藏目录 .git，这个目录不算工作区，而是 Git 的版本库。
+暂存区(Stage/Index)：一般存放在 .git 目录下的 index 文件(.git/index)中，所以我们把暂存区有时也叫作索引(index)。
+
+*Git 有三种状态：
+已提交(committed)：表示数据已经安全的保存在本地数据库中。
+已修改(modified)：表示修改了文件，但还没保存到数据库中。
+已暂存(staged)：表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。
+
+*Git 命令：
+ 查看git 版本信息  ： git -- version    
+ 配置用户信息： git config --global user.name 'user_name'
+                         git config --global user.email 'user_email'
+ 配置文本编辑器（设置Git默认使用的文本编辑器, 一般可能会是 Vi 或者 Vim。如果你有其他偏好，比如 Emacs 的话，可以重新设置）： 
+   git config --global core.editor emacs
+ 配置差异分析工具（解决合并冲突时使用哪种差异分析工具。比如要改用 vimdiff ）：
+   git config --global merge.tool vimdiff
+ 查看配置信息：    git config --list 
+                            git config user.name (直接查阅某个环境变量的设定）
+ 创建代码仓库： git init
+ 克隆  ： git  clone
+ 添加到暂存区 ：    git add 
+    git add .                        将所有修改添加到暂存区
+    git add *Presenter         将以Presenter结尾的文件的所有修改添加到暂存区
+    git add Base*                将所有以Base开头的文件的修改添加到暂存区(例如:BaseActivity.java,BaseFragment.java)
+    git add Model?             将以Model开头且后面只有一位的文件的修改添加到暂存区(例如:Model1.java,ModelA.java)
+    git add model/*.java     将model目录及其子目录下所有 *.java 文件的修改添加到暂存区
+
+ *代码提交： git commit    （将索引的当前内容与描述更改的用户和日志消息一起存储在新的提交中）
+ 提交暂存库到本地仓库区 ： git commit -m “提交信息”
+ 将未添加到暂存区的文件，同时提交到本地仓库区： git commit -am                git commit -a  -m
+ 提交暂存区的指定文件到仓库区：  git commit  ... -m
+ 提交时显示所有diff 信息：        git commit -v
+ 修改最近一次提交 ： git commit --amend
+ 修改最近一次提交，并改写上一次commit的提交信息  ：   git  commit --amend -m
+ *列出所有本地分支： git branch
+ 列出所有远程分支 ： git branch  -r
+ 列出所有本地分支和远程分支 ：  git brach -a
+ 新建一个分支，但依然停留在当前分支 ：git  branch
+ 新建一个分支 ，并切换到该分支 ： git checkout  -b
+ 新建一个分支，与指定的远程分支建立追踪关系  ： git branch --track 
+ 切换到指定分支，并更新工作区 ： git checkout
+ 切换到上一个分支 ： git checkout -
+ 建立追踪关系 ，在现有分支与指定的远程分支之间： git branch  --set -upstream
+ 合并指定分支到当前分支： git merge
+ 选择一个commit 合并进当前分支 ： git cherry -pick
+ 删除本地分支 ： git branch -d
+ 删除远程分支 ： git push origin -- delete
+ *列出所有标签 ：git tag   （新建一个标签再当前 commit ，新建一个标签在指定 commit）
+ 新建一个带标签信息的标签在当前 commit ： git tag  -a -m [message]
+ 删除本地标签 ： git tag -d 
+ 删除远程标签： git push origin  -- delete tag    （直接删除)
+ 查看标签信息： git show 
+ 推送某个标签到远程 ： git push origin
+ 一次性推送所有尚未推送到远程的本地标签  ：git push origin --tags
+ *查看Git 版本号 ： git  --version 
+ 查看所有变更的文件： git status 
+ *显示所有远程仓库 ： git remote -v
+ 获取某个远程主机的全部更新  ：git fetch
+ 显示某个远程仓库的信息 ： git remote show
+ 获取某个远程主机的某个分支的更新与当前分支合并 ： git pull
+ 将当前分支推送到远程主机的对应分支 ： git push
+ 强行推送当前分支到远程主机的对应分支(忽略冲突) ：git push  --force
+ 推送所有分支到远程仓库 ： git push  --all
+ *恢复 暂存区的指定文件到工作区 : git checkout
+ 回滚添加操作 : git reset
+ 回滚最近一次提交 ： git reset --soft HEAD^
+ 永久删除最后几个提交 ： git reset  -- hard HEAD~3
+显示当前分支的提交历史记录  ： git log 
+**通过git 将代码提交到 github  第二种方式
+本地有 Git 仓库，并且我们已经进行了多次commit操作
+1.建立一个本地仓库，进入该仓库，进入git  init 初始化操作
+2.输入 git remote add origin +仓库地址    命令，关联远程仓库
+3.输入git pull origin master命令，同步远程仓库和本地仓库
+4.再回到本地仓库查看是否远程仓库内容同步到本地
+* git redolog
+* git rebase -i   两种使用 
+1.修改历史提交：
+   先查看文件内容状态： cat    file
+   只显示当前版本之前的记录 ：git log --oneline
+    git  rebase  -i +  修改行
+     *报错：git rebase -i dbc0ffc
+error: cannot rebase: You have unstaged changes.
+error: Please commit or stash them.
+      方法 ： git add  -A
+     *后缀：(main|REBASE-i 1/1)  
+      方法： git push origin master的时候会出现失败 ，使用git rebase --abort 解决代码回退----git init  恢复  
+   
+
+
+   
+ 
+
+
