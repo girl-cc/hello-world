@@ -1,0 +1,29 @@
+git 命令操作
+本地库初始化： git init   （创建了一个名为.git的隐藏目录。.git 目录中存放的是与本地库相关的子目录和文件，不要删除也不要胡乱修改。）
+状态查看：git status
+更新本地内容：
+git status
+git add +文件
+git commit -m "本次更新的说明"+文件
+git push origin master # 将本地主分支推到远程主分支
+添加：git add +file  （将工作区的“新建/修改”添加到暂存区)
+提交：git commit -m“提交信息”+file  （将暂存区的内容提交到本地库)
+文件从暂存区恢复到原来的状态：git rm --cached+file
+查看历史记录：
+       git log （ 多屏显示时控制方式：空格向下翻页，b向上翻页，q退出）
+       git --pretty=oneline （只显示当前版本之前的记录）
+       git log --oneline  （只显示当前版本之前的记录）
+       git reflog　HEAD@ {移动到当前版本需要多少步}   
+            前进后退（本质：就是移动HEAD指针）
+       基于索引值操作：git reset --hard [局部索引值]
+    使用^符号：只能后退
+            git reset --hard HEAD^：一个^表示后退一步，n 个表示后退 n 步
+    使用~符号：只能后退
+          git reset --hard HEAD~n：表示后退 n 步
+查看分支：git branch -a (显示所有本地及远端分支名）/ -v （则只显示本地的所有分支名）
+创建分支：git branch <分支名>
+切换分支 ：git checkout <分支名>
+        git checkout -b develop 创建并切换到develop分支，前提是该分支不存在，如果存在的话会报错。
+合并分支：
+① 第一步：切换到需要合并到的那个分支上 ，git checkout <目标分支名>
+② 第二步：执行 merge 命令：git merge <源分支名>
